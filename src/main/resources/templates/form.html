@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dracula" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Campanha</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+
+<nav class="navbar bg-base-300 shadow-sm">
+    <div class="flex-1">
+        <a href="/" class="btn btn-ghost text-xl">DoaFácil</a>
+    </div>
+</nav>
+
+<div class="flex justify-center mt-10">
+    <div class="card w-96 bg-base-300 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title">Cadastrar Campanha</h2>
+            <form th:action="@{/campanha}" method="post" th:object="${campanha}">
+                <div class="form-control mb-2">
+                    <label class="label">Título</label>
+                    <input type="text" th:field="*{titulo}" placeholder="Digite o título" class="input input-bordered"/>
+                </div>
+
+                <div class="form-control mb-2">
+                    <label class="label">Descrição</label>
+                    <textarea th:field="*{descricao}" placeholder="Explique a campanha"
+                              class="textarea textarea-bordered"></textarea>
+                </div>
+
+                <div class="form-control mb-2">
+                    <label class="label">Meta (R$)</label>
+                    <input type="number" th:field="*{metaValor}" class="input input-bordered"/>
+                </div>
+
+                <div class="form-control mb-2">
+                    <label class="label">Data de Início</label>
+                    <input type="date" th:field="*{dataInicio}" class="input input-bordered"/>
+                </div>
+
+                <div class="form-control mb-2">
+                    <label class="label">Data de Fim</label>
+                    <input type="date" th:field="*{dataFim}" class="input input-bordered"/>
+                </div>
+
+                <div class="form-control mt-4">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

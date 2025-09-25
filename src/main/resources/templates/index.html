@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dracula" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>DoaFácil</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+
+<nav class="navbar bg-base-300 shadow-sm">
+    <div class="flex-1">
+        <a class="btn btn-ghost text-xl">DoaFácil</a>
+    </div>
+    <div class="flex-none">
+        <ul class="menu menu-horizontal px-1">
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<a href="/campanha/form" class="btn btn-primary m-4">Nova Campanha</a>
+
+<div th:if="${message}" role="alert" class="alert alert-success m-4">
+    <span th:text="${message}"></span>
+</div>
+
+<main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-4 p-8">
+    <div th:each="campanha : ${campanhas}" class="card bg-base-300 w-96 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title" th:text="${campanha.titulo}"></h2>
+            <p th:text="${campanha.descricao}"></p>
+            <div class="badge badge-info p-3">
+                Meta: R$ <span th:text="${campanha.metaValor}"></span>
+            </div>
+            <div class="badge badge-success p-3">
+                Arrecadado: R$ <span th:text="${campanha.valorArrecadado}"></span>
+            </div>
+            <div class="card-actions justify-end mt-4">
+                <a th:href="@{'/doacao/form/' + ${campanha.id}}" class="btn btn-primary">Doar</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=doafacil'
+      - 'POSTGRES_PASSWORD=doafacil'
+      - 'POSTGRES_USER=doafacil'
+    ports:
+      - '5432:5432'
