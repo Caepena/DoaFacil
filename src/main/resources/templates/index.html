@@ -1,43 +1,55 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dracula" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="pt-BR" data-theme="dracula" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>DoaFácil</title>
+    <title th:text="#{app.name}">DoaFácil</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css"/>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
 <nav class="navbar bg-base-300 shadow-sm">
     <div class="flex-1">
-        <a class="btn btn-ghost text-xl">DoaFácil</a>
+        <a class="btn btn-ghost text-xl" th:text="#{app.name}">DoaFácil</a>
     </div>
     <div class="flex-none">
         <ul class="menu menu-horizontal px-1">
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="/logout" th:text="#{logout}">Logout</a></li>
         </ul>
     </div>
 </nav>
 
-<a href="/campanha/form" class="btn btn-primary m-4">Nova Campanha</a>
+<div class="flex gap-4 m-4">
+    <a href="/campanha/form" class="btn btn-primary" th:text="#{campaign.new}"></a>
+    <a href="/ong/form" class="btn btn-secondary" th:text="#{ong.new}"></a>
+</div>
 
 <div th:if="${message}" role="alert" class="alert alert-success m-4">
     <span th:text="${message}"></span>
 </div>
 
-<main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-4 p-8">
-    <div th:each="campanha : ${campanhas}" class="card bg-base-300 w-96 shadow-xl">
-        <div class="card-body">
-            <h2 class="card-title" th:text="${campanha.titulo}"></h2>
-            <p th:text="${campanha.descricao}"></p>
-            <div class="badge badge-info p-3">
-                Meta: R$ <span th:text="${campanha.metaValor}"></span>
-            </div>
-            <div class="badge badge-success p-3">
-                Arrecadado: R$ <span th:text="${campanha.valorArrecadado}"></span>
-            </div>
-            <div class="card-actions justify-end mt-4">
-                <a th:href="@{'/doacao/form/' + ${campanha.id}}" class="btn btn-primary">Doar</a>
+<main class="p-8">
+    <h2 class="text-2xl font-bold mb-6" th:text="#{campaign.list}"></h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-4">
+        <div th:each="campanha : ${campanhas}" class="card bg-base-300 w-96 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title" th:text="${campanha.titulo}"></h2>
+                <p th:text="${campanha.descricao}"></p>
+
+                <div class="flex flex-wrap gap-2 mt-3">
+                    <div class="badge badge-info p-3">
+                        <span th:text="#{campaign.goal}">Meta</span>: R$ <span th:text="${campanha.metaValor}"></span>
+                    </div>
+                    <div class="badge badge-success p-3">
+                        <span th:text="#{campaign.raised}"></span>: R$ <span th:text="${campanha.valorArrecadado}"></span>
+                    </div>
+                </div>
+
+                <div class="card-actions justify-end mt-4">
+                    <a th:href="@{'/doacao/form/' + ${campanha.id}}" class="btn btn-primary" th:text="#{donation.new}"></a>
+                </div>
             </div>
         </div>
     </div>
