@@ -35,15 +35,10 @@ public class ONG {
 
     private String telefone;
     private String descricao;
-    private String logoUrl; // URL para uma imagem/logo
 
-    // Relacionamento: Uma ONG é gerenciada por um Usuário (o criador/admin)
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User responsavel;
+    private User user;
 
-    // Relacionamento: Uma ONG pode ter várias campanhas
     @OneToMany(mappedBy = "ong")
     private List<Campanha> campanhas;
-
 }
