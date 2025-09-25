@@ -25,15 +25,18 @@ public class Campanha {
     @Size(min = 5, max = 100, message = "{campaign.titulo.size}")
     private String titulo;
 
+    @NotBlank(message = "{campaign.descricao.notblank}")
     @Size(min = 20, max = 1000, message = "{campaign.descricao.size}")
     private String descricao;
 
     @NotNull(message = "{campaign.metavalor.notnull}")
     @Min(value = 1, message = "{campaign.metavalor.min}")
+    @Max(value = 10000000, message = "{campaign.metavalor.max}")
     private Integer metaValor;
 
     @NotNull(message = "{campaign.valorarrecadado.notnull}")
     @Min(value = 0, message = "{campaign.valorarrecadado.min}")
+    @Max(value = 10000000, message = "{campaign.valorarrecadado.max}")
     private Integer valorArrecadado;
 
     @NotNull(message = "{campaign.datainicio.notnull}")
